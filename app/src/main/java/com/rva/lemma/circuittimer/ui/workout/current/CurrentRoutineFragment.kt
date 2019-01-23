@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rva.lemma.circuittimer.R
-import com.rva.lemma.circuittimer.data.database.Exercise
-import com.rva.lemma.circuittimer.data.database.ExerciseType
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.current_routine_fragment.*
@@ -32,9 +30,6 @@ class CurrentRoutineFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentRoutineViewModel::class.java)
-        // TODO: Use the ViewModel
-
-        val exercises = generateExercises(6)
 
         val groupAdapter = GroupAdapter<ViewHolder>()
         groupAdapter.add(ExerciseItem())
@@ -45,12 +40,4 @@ class CurrentRoutineFragment : Fragment() {
         currentRoutineRecyclerView.adapter = groupAdapter
         currentRoutineRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
-
-    private fun generateExercises(count: Int): MutableList<Exercise> {
-
-        return MutableList(count){
-            Exercise("Jumpping Jacks", 3000, ExerciseType.WORK)
-        }
-    }
-
 }
