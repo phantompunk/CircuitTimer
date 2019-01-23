@@ -6,7 +6,6 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 
 class ExerciseItem: Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getLayout() = R.layout.exercise_card

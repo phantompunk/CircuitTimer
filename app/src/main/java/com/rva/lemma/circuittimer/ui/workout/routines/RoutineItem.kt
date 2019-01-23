@@ -7,9 +7,6 @@ import kotlinx.android.synthetic.main.routine_card.*
 
 class RoutineItem: Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.apply {
-//            routine_name_tv.text
-        }
     }
 
     override fun getLayout() = R.layout.routine_card

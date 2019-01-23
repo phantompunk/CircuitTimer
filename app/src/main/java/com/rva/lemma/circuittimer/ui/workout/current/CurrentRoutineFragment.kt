@@ -1,14 +1,15 @@
 package com.rva.lemma.circuittimer.ui.workout.current
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.rva.lemma.circuittimer.R
+import com.rva.lemma.circuittimer.data.database.Exercise
+import com.rva.lemma.circuittimer.data.database.ExerciseType
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.current_routine_fragment.*
@@ -33,11 +34,22 @@ class CurrentRoutineFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(CurrentRoutineViewModel::class.java)
         // TODO: Use the ViewModel
 
-        val groupAdapter = GroupAdapter<ViewHolder>()
+        val exercises = generateExercises(6)
 
-        currentRoutineRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@CurrentRoutineFragment.context)
-            adapter = groupAdapter
+        val groupAdapter = GroupAdapter<ViewHolder>()
+        groupAdapter.add(ExerciseItem())
+        groupAdapter.add(ExerciseItem())
+        groupAdapter.add(ExerciseItem())
+        groupAdapter.add(ExerciseItem())
+
+        currentRoutineRecyclerView.adapter = groupAdapter
+        currentRoutineRecyclerView.layoutManager = LinearLayoutManager(this.context)
+    }
+
+    private fun generateExercises(count: Int): MutableList<Exercise> {
+
+        return MutableList(count){
+            Exercise("Jumpping Jacks", 3000, ExerciseType.WORK)
         }
     }
 
