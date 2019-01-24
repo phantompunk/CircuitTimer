@@ -3,6 +3,7 @@ package com.rva.lemma.circuittimer.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import java.util.*
 
 @Entity(tableName = "routines")

@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.rva.lemma.circuittimer.data.database.entity.Exercise
 import com.rva.lemma.circuittimer.data.database.entity.Routine
 
-@Database(entities = [Routine::class, Exercise::class], version = 1)
+@Database(entities = [Routine::class, Exercise::class], version = 1, exportSchema = false)
+@TypeConverters(ExerciseConverter::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun routineDao(): RoutineDao
 
