@@ -11,12 +11,14 @@ import com.rva.lemma.circuittimer.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.current_routine_fragment.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class CurrentRoutineFragment : Fragment() {
+class CurrentRoutineFragment : Fragment(), KodeinAware {
+    override val kodein by closestKodein()
 
-    companion object {
-        fun newInstance() = CurrentRoutineFragment()
-    }
+    private val viewModelFactory:CurrentRoutineViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentRoutineViewModel
 
@@ -29,7 +31,11 @@ class CurrentRoutineFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentRoutineViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(CurrentRoutineViewModel::class.java)
+
+        bindUI()
+
 
         val groupAdapter = GroupAdapter<ViewHolder>()
         groupAdapter.add(ExerciseItem())
@@ -39,5 +45,9 @@ class CurrentRoutineFragment : Fragment() {
 
         currentRoutineRecyclerView.adapter = groupAdapter
         currentRoutineRecyclerView.layoutManager = LinearLayoutManager(this.context)
+    }
+
+    private fun bindUI() {
+
     }
 }

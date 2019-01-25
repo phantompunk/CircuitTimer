@@ -12,12 +12,14 @@ import com.rva.lemma.circuittimer.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.workout_routines_fragment.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class WorkoutRoutinesFragment : Fragment() {
+class WorkoutRoutinesFragment() : Fragment(), KodeinAware {
+    override val kodein by closestKodein()
 
-    companion object {
-        fun newInstance() = WorkoutRoutinesFragment()
-    }
+    private val viewModelFactory:WorkoutRoutinesViewModelFactory by instance()
 
     private lateinit var viewModel: WorkoutRoutinesViewModel
 

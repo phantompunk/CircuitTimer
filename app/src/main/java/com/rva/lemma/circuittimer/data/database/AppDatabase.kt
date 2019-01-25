@@ -12,6 +12,7 @@ import com.rva.lemma.circuittimer.data.database.entity.Routine
 @TypeConverters(ExerciseConverter::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun routineDao(): RoutineDao
+    abstract fun exerciseDao(): ExerciseDao
 
     companion object {
         @Volatile private var instance: AppDatabase? = null
