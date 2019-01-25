@@ -2,6 +2,10 @@ package com.rva.lemma.circuittimer
 
 import android.app.Application
 import com.rva.lemma.circuittimer.data.database.AppDatabase
+import com.rva.lemma.circuittimer.data.database.repository.ExerciseRepository
+import com.rva.lemma.circuittimer.data.database.repository.ExerciseRepositoryImpl
+import com.rva.lemma.circuittimer.data.database.repository.RoutineRepository
+import com.rva.lemma.circuittimer.data.database.repository.RoutineRepositoryImpl
 import com.rva.lemma.circuittimer.ui.workout.current.CurrentRoutineViewModelFactory
 import com.rva.lemma.circuittimer.ui.workout.routines.WorkoutRoutinesViewModelFactory
 import org.kodein.di.Kodein
@@ -19,7 +23,13 @@ class TimerApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { instance<AppDatabase>().routineDao() }
         bind() from singleton { instance<AppDatabase>().exerciseDao() }
+        bind<ExerciseRepository>() with singleton { ExerciseRepositoryImpl() }
+        bind<RoutineRepository>() with singleton { RoutineRepositoryImpl() }
         bind() from provider { CurrentRoutineViewModelFactory(instance()) }
-        bind() from provider { WorkoutRoutinesViewModelFactory(instance())}
+        bind() from provider { WorkoutRoutinesViewModelFactory(instance()) }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
     }
 }

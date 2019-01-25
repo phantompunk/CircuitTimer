@@ -32,7 +32,8 @@ class WorkoutRoutinesFragment() : Fragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WorkoutRoutinesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(WorkoutRoutinesViewModel::class.java)
 
         val groupAdapter = GroupAdapter<ViewHolder>()
         groupAdapter.add(RoutineItem())

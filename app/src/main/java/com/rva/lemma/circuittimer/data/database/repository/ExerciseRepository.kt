@@ -2,9 +2,9 @@ package com.rva.lemma.circuittimer.data.database.repository
 
 interface ExerciseRepository {
 
-    fun getAllExercises()
+    fun getAllExercises(): String
 
-    fun getExerciseById()
+    fun getExerciseById(): String
 
-    fun getExercisesByRoutine()
+    fun getExercisesByRoutine(): String
 }

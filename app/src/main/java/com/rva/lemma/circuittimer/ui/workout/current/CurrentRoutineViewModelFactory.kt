@@ -6,7 +6,7 @@ import com.rva.lemma.circuittimer.data.database.repository.RoutineRepository
 
 class CurrentRoutineViewModelFactory(
     private val routineRepository: RoutineRepository
-): ViewModelProvider.Factory {
+): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
