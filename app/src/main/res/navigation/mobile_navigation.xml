@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation"
+            app:startDestination="@id/currentRoutineFragment">
+
+    <fragment android:id="@+id/currentRoutineFragment"
+              android:name="com.rva.lemma.circuittimer.ui.workout.current.CurrentRoutineFragment"
+              android:label="current_routine_fragment"
+              tools:layout="@layout/current_routine_fragment"/>
+
+    <fragment android:id="@+id/workoutRoutinesFragment"
+              android:name="com.rva.lemma.circuittimer.ui.workout.routines.WorkoutRoutinesFragment"
+              android:label="workout_routines_fragment"
+              tools:layout="@layout/workout_routines_fragment"/>
+
+    <fragment android:id="@+id/settingsFragment"
+              android:name="com.rva.lemma.circuittimer.ui.settings.SettingsFragment"
+              android:label="SettingsFragment"/>
+    <fragment android:id="@+id/trackerFragment" android:name="com.rva.lemma.circuittimer.ui.tracker.TrackerFragment"
+              android:label="tracker_fragment" tools:layout="@layout/tracker_fragment"/>
+</navigation>

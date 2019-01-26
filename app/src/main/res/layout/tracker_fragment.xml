@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.tracker.TrackerFragment" android:id="@+id/frameLayout">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:text="01:36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="96sp" android:textColor="#EB5757" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.496" app:layout_constraintVertical_bias="0.499"
+                android:id="@+id/tracker_timer"/>
+        <TextView
+                android:text="Workout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tracker_workout_tv"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline6" android:layout_marginTop="446dp"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toTopOf="@+id/tracker_time_left_tv"/>
+        <TextView
+                android:text="Time Remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/tracker_time_left_tv"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline6" android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tracker_workout_tv"
+                app:layout_constraintBottom_toTopOf="@+id/tracker_time_left_"/>
+        <TextView
+                android:text="Elasped Time"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tracker_time_elasped_tv"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8" android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tracker_circuit_tv" android:layout_marginBottom="157dp"/>
+        <TextView
+                android:text="Circuit"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/tracker_circuit_tv"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="446dp" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="79dp" app:layout_constraintBottom_toTopOf="@+id/tracker_time_elasped_tv"/>
+        <TextView
+                android:text="Jumping Jacks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tracker_workout_name"
+                android:textSize="22sp" android:textStyle="bold"
+                android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toBottomOf="@+id/tracker_workout_tv"/>
+        <TextView
+                android:text="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tracker_circuit_num"
+                android:textSize="22sp" android:textStyle="bold"
+                android:layout_marginEnd="16dp" app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintTop_toBottomOf="@+id/tracker_circuit_tv"/>
+        <TextView
+                android:text="12:34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tracker_time_elasped"
+                android:textSize="22sp" android:textStyle="bold"
+                android:layout_marginEnd="16dp" app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintTop_toBottomOf="@+id/tracker_time_elasped_tv"/>
+        <TextView
+                android:text="16:46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tracker_time_left_"
+                android:textSize="22sp" android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline6" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tracker_time_left_tv" android:layout_marginBottom="127dp"/>
+        <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline6" app:layout_constraintGuide_begin="50dp"/>
+        <androidx.constraintlayout.widget.Guideline
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintGuide_begin="363dp"
+                android:id="@+id/guideline8"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
