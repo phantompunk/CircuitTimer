@@ -7,20 +7,24 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.rva.lemma.circuittimer.R
-import com.rva.lemma.circuittimer.data.database.Exercise
-import com.rva.lemma.circuittimer.data.database.ExerciseType
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.current_routine_fragment.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class CurrentRoutineFragment : Fragment() {
+class CurrentRoutineFragment : Fragment(), KodeinAware {
+    override val kodein by closestKodein()
 
-    companion object {
-        fun newInstance() = CurrentRoutineFragment()
-    }
+    private val viewModelFactory:CurrentRoutineViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentRoutineViewModel
+
+//    private var fab: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,10 +35,11 @@ class CurrentRoutineFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentRoutineViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(CurrentRoutineViewModel::class.java)
 
-        val exercises = generateExercises(6)
+//        fab = view!!.findViewById(R.id.fab_add)
+//        bindUI()
 
         val groupAdapter = GroupAdapter<ViewHolder>()
         groupAdapter.add(ExerciseItem())
@@ -46,11 +51,12 @@ class CurrentRoutineFragment : Fragment() {
         currentRoutineRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
 
-    private fun generateExercises(count: Int): MutableList<Exercise> {
-
-        return MutableList(count){
-            Exercise("Jumpping Jacks", 3000, ExerciseType.WORK)
-        }
-    }
-
+//    private fun bindUI() {
+//        fab!!.setOnClickListener { view ->
+//            Snackbar.make(view, "Here's a snack", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null)
+//                .show()
+//
+//        }
+//    }
 }

@@ -2,22 +2,29 @@ package com.rva.lemma.circuittimer.ui.workout.routines
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.rva.lemma.circuittimer.R
+import com.rva.lemma.circuittimer.data.database.entity.Routine
+import com.rva.lemma.circuittimer.ui.base.ScopedFragment
+import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.workout_routines_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class WorkoutRoutinesFragment : Fragment() {
+class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
+    override val kodein by closestKodein()
 
-    companion object {
-        fun newInstance() = WorkoutRoutinesFragment()
-    }
+    private val viewModelFactory:WorkoutRoutinesViewModelFactory by instance()
 
     private lateinit var viewModel: WorkoutRoutinesViewModel
 
@@ -30,16 +37,59 @@ class WorkoutRoutinesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WorkoutRoutinesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(WorkoutRoutinesViewModel::class.java)
 
-        val groupAdapter = GroupAdapter<ViewHolder>()
-        groupAdapter.add(RoutineItem())
-        groupAdapter.add(RoutineItem())
-        groupAdapter.add(RoutineItem())
-        groupAdapter.add(RoutineItem())
-
-        workoutRoutinesRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        workoutRoutinesRecyclerView.adapter = groupAdapter
+        bindUI()
     }
 
+    private fun bindUI() = launch(Dispatchers.Main) {
+        val allRoutines = viewModel.routines.await()
+//        val routine = viewModel.newRoutine.await()
+
+        allRoutines.observe(this@WorkoutRoutinesFragment, Observer { routines ->
+            if (routines == null) return@Observer
+            initRecyclerView(routines.toRoutineItems())
+        })
+//        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+////            addAll(allRoutines
+//        }
+//        groupAdapter.add(RoutineItem(routine = routine))
+//
+//        workoutRoutinesRecyclerView.layoutManager = LinearLayoutManager(this.context)
+//        workoutRoutinesRecyclerView.adapter = groupAdapter
+//
+//        fab_add_routine.setOnClickListener { view ->
+//            groupAdapter.add(RoutineItem(routine.))
+//        }
+    }
+
+    private fun initRecyclerView(routines: List<RoutineItem>) {
+        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+            addAll(routines)
+        }
+
+        workoutRoutinesRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@WorkoutRoutinesFragment.context)
+            adapter = groupAdapter
+        }
+
+//        fab_add_routine.setOnClickListener { view ->
+//            groupAdapter.add()
+//        }
+    }
+
+//    private fun initRecyclerView(routines: List<Routine>) {
+//        val groupAdapter = GroupAdapter<ViewHolder>()
+//
+//        groupAdapter.add(RoutineItem(routines.get(0)))
+//    }
+
+    private fun List<Routine>.toRoutineItems(): List<RoutineItem> {
+        return map {
+            RoutineItem(it)
+        }
+    }
 }
+
+
