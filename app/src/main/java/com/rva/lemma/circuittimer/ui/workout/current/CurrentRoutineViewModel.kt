@@ -1,12 +1,12 @@
 package com.rva.lemma.circuittimer.ui.workout.current
 
-import android.view.View
-import androidx.lifecycle.ViewModel;
 import com.rva.lemma.circuittimer.data.database.repository.RoutineRepository
+import com.rva.lemma.circuittimer.internal.lazyDeferred
+import com.rva.lemma.circuittimer.ui.base.WorkoutViewModel
 
 class CurrentRoutineViewModel(
     private val routineRepository: RoutineRepository
-) : ViewModel() {
+) : WorkoutViewModel(routineRepository) {
 
-//    private val routine = routineRepository.getSelectedRoutine()
+    private val currentRoutine by lazyDeferred { routineRepository.createRoutine("90") }
 }

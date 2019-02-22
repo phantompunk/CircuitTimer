@@ -5,7 +5,6 @@ import com.rva.lemma.circuittimer.data.database.RoutineDao
 import com.rva.lemma.circuittimer.data.database.entity.Routine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.threeten.bp.Instant
 
 class RoutineRepositoryImpl(
     private val routineDao: RoutineDao

@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.rva.lemma.circuittimer.R
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.current_routine_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -23,8 +21,6 @@ class CurrentRoutineFragment : Fragment(), KodeinAware {
     private val viewModelFactory:CurrentRoutineViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentRoutineViewModel
-
-//    private var fab: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +34,6 @@ class CurrentRoutineFragment : Fragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(CurrentRoutineViewModel::class.java)
 
-//        fab = view!!.findViewById(R.id.fab_add)
-//        bindUI()
-
         val groupAdapter = GroupAdapter<ViewHolder>()
         groupAdapter.add(ExerciseItem())
         groupAdapter.add(ExerciseItem())
@@ -50,13 +43,4 @@ class CurrentRoutineFragment : Fragment(), KodeinAware {
         currentRoutineRecyclerView.adapter = groupAdapter
         currentRoutineRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
-
-//    private fun bindUI() {
-//        fab!!.setOnClickListener { view ->
-//            Snackbar.make(view, "Here's a snack", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .show()
-//
-//        }
-//    }
 }

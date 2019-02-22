@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rva.lemma.circuittimer.R
 import com.rva.lemma.circuittimer.data.database.entity.Routine
 import com.rva.lemma.circuittimer.ui.base.ScopedFragment
-import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.workout_routines_fragment.*
@@ -45,23 +44,11 @@ class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch(Dispatchers.Main) {
         val allRoutines = viewModel.routines.await()
-//        val routine = viewModel.newRoutine.await()
 
         allRoutines.observe(this@WorkoutRoutinesFragment, Observer { routines ->
             if (routines == null) return@Observer
             initRecyclerView(routines.toRoutineItems())
         })
-//        val groupAdapter = GroupAdapter<ViewHolder>().apply {
-////            addAll(allRoutines
-//        }
-//        groupAdapter.add(RoutineItem(routine = routine))
-//
-//        workoutRoutinesRecyclerView.layoutManager = LinearLayoutManager(this.context)
-//        workoutRoutinesRecyclerView.adapter = groupAdapter
-//
-//        fab_add_routine.setOnClickListener { view ->
-//            groupAdapter.add(RoutineItem(routine.))
-//        }
     }
 
     private fun initRecyclerView(routines: List<RoutineItem>) {
@@ -73,22 +60,10 @@ class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
             layoutManager = LinearLayoutManager(this@WorkoutRoutinesFragment.context)
             adapter = groupAdapter
         }
-
-//        fab_add_routine.setOnClickListener { view ->
-//            groupAdapter.add()
-//        }
     }
 
-//    private fun initRecyclerView(routines: List<Routine>) {
-//        val groupAdapter = GroupAdapter<ViewHolder>()
-//
-//        groupAdapter.add(RoutineItem(routines.get(0)))
-//    }
-
     private fun List<Routine>.toRoutineItems(): List<RoutineItem> {
-        return map {
-            RoutineItem(it)
-        }
+        return map { RoutineItem(it) }
     }
 }
 
