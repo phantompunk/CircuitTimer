@@ -1,8 +1,13 @@
 package com.rva.lemma.circuittimer.data.database.repository
 
+import androidx.lifecycle.LiveData
+import com.rva.lemma.circuittimer.data.database.entity.Routine
+
 interface RoutineRepository {
 
-    fun getSelectedRoutine(): String
+    suspend fun getAllRoutines(): LiveData<out List<Routine>>
 
-    fun getAllRoutines(): String
+    suspend fun getRoutineByID(routineID: String): LiveData<out Routine>
+
+    suspend fun createRoutine(routineID: String)
 }

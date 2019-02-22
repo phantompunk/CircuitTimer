@@ -8,5 +8,5 @@ class CurrentRoutineViewModel(
     private val routineRepository: RoutineRepository
 ) : ViewModel() {
 
-    private val routine = routineRepository.getSelectedRoutine()
+//    private val routine = routineRepository.getSelectedRoutine()
 }

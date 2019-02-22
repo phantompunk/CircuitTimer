@@ -1,5 +1,6 @@
 package com.rva.lemma.circuittimer.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -21,5 +22,8 @@ interface RoutineDao {
     fun destroyRoutine(routine: Routine)
 
     @Query("SELECT * FROM routines WHERE id = :id")
-    fun getRoutineById(id: String): Routine
+    fun getRoutineById(id: String): LiveData<Routine>
+
+    @Query("SELECT * FROM routines")
+    fun getRoutines(): LiveData<List<Routine>>
 }
