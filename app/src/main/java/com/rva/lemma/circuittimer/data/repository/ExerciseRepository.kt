@@ -1,4 +1,4 @@
-package com.rva.lemma.circuittimer.data.database.repository
+package com.rva.lemma.circuittimer.data.repository
 
 interface ExerciseRepository {
 

@@ -2,10 +2,10 @@ package com.rva.lemma.circuittimer
 
 import android.app.Application
 import com.rva.lemma.circuittimer.data.database.AppDatabase
-import com.rva.lemma.circuittimer.data.database.repository.ExerciseRepository
-import com.rva.lemma.circuittimer.data.database.repository.ExerciseRepositoryImpl
-import com.rva.lemma.circuittimer.data.database.repository.RoutineRepository
-import com.rva.lemma.circuittimer.data.database.repository.RoutineRepositoryImpl
+import com.rva.lemma.circuittimer.data.repository.ExerciseRepository
+import com.rva.lemma.circuittimer.data.repository.ExerciseRepositoryImpl
+import com.rva.lemma.circuittimer.data.repository.RoutineRepository
+import com.rva.lemma.circuittimer.data.repository.RoutineRepositoryImpl
 import com.rva.lemma.circuittimer.ui.workout.current.CurrentRoutineViewModelFactory
 import com.rva.lemma.circuittimer.ui.workout.routines.WorkoutRoutinesViewModelFactory
 import org.kodein.di.Kodein

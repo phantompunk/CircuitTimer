@@ -1,4 +1,4 @@
-package com.rva.lemma.circuittimer.data.database.repository
+package com.rva.lemma.circuittimer.data.repository
 
 import androidx.lifecycle.LiveData
 import com.rva.lemma.circuittimer.data.database.RoutineDao

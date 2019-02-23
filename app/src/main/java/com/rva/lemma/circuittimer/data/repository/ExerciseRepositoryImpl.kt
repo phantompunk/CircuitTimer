@@ -1,4 +1,4 @@
-package com.rva.lemma.circuittimer.data.database.repository
+package com.rva.lemma.circuittimer.data.repository
 
 class ExerciseRepositoryImpl : ExerciseRepository {
     override fun getAllExercises(): String {
