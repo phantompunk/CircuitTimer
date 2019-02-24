@@ -9,5 +9,5 @@ interface RoutineRepository {
 
     suspend fun getRoutineByID(routineID: String): LiveData<out Routine>
 
-    suspend fun createRoutine(routineID: String)
+    fun createRoutine(routineID: String)
 }

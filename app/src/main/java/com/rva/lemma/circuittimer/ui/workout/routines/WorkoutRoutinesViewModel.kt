@@ -12,4 +12,8 @@ class WorkoutRoutinesViewModel(
     val routines by lazyDeferred { routinesRepository.getAllRoutines() }
 
     val newRoutine by lazyDeferred { routinesRepository.createRoutine(UUID.randomUUID().toString())}
+
+    fun createNewRoutine() {
+        routinesRepository.createRoutine(UUID.randomUUID().toString())
+    }
 }

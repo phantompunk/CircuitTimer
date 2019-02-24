@@ -2,11 +2,13 @@ package com.rva.lemma.circuittimer.ui.workout.routines
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 
 import com.rva.lemma.circuittimer.R
 import com.rva.lemma.circuittimer.data.database.entity.Routine
@@ -44,11 +46,23 @@ class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch(Dispatchers.Main) {
         val allRoutines = viewModel.routines.await()
-
         allRoutines.observe(this@WorkoutRoutinesFragment, Observer { routines ->
-            if (routines == null) return@Observer
+            if (routines.isEmpty()) {
+                Log.d("Routines", "Routines DB is empty")
+            }
             initRecyclerView(routines.toRoutineItems())
         })
+
+        fab_add_routine!!.setOnClickListener { view ->
+            Snackbar.make(view, "New Workout Added!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .show()
+            createRoutine()
+        }
+    }
+
+    private fun createRoutine() = launch(Dispatchers.IO) {
+        viewModel.createNewRoutine()
     }
 
     private fun initRecyclerView(routines: List<RoutineItem>) {
@@ -57,8 +71,8 @@ class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
         }
 
         workoutRoutinesRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@WorkoutRoutinesFragment.context)
             adapter = groupAdapter
+            layoutManager = LinearLayoutManager(this@WorkoutRoutinesFragment.context)
         }
     }
 

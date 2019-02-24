@@ -16,11 +16,9 @@ class RoutineRepositoryImpl(
         }
     }
 
-    override suspend fun createRoutine(routineID: String) {
-        withContext(Dispatchers.IO) {
-            val newRoutine = Routine(routineID)
-            routineDao.addRoutine(newRoutine)
-        }
+    override fun createRoutine(routineID: String) {
+        val newRoutine = Routine(routineID)
+        routineDao.addRoutine(newRoutine)
     }
 
     override suspend fun getAllRoutines(): LiveData<out List<Routine>> {
