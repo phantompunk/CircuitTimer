@@ -9,6 +9,9 @@ import kotlinx.coroutines.withContext
 class RoutineRepositoryImpl(
     private val routineDao: RoutineDao
 ) : RoutineRepository {
+    override suspend fun deleteRoutineImmediately(routine: Routine) {
+        routineDao.destroyRoutine(routine)
+    }
 
     override suspend fun getRoutineByID(routineID: String): LiveData<out Routine> {
         return withContext(Dispatchers.IO) {

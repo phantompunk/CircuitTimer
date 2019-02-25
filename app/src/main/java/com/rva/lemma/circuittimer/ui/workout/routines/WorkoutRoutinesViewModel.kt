@@ -1,5 +1,6 @@
 package com.rva.lemma.circuittimer.ui.workout.routines
 
+import com.rva.lemma.circuittimer.data.database.entity.Routine
 import com.rva.lemma.circuittimer.data.repository.RoutineRepository
 import com.rva.lemma.circuittimer.internal.lazyDeferred
 import com.rva.lemma.circuittimer.ui.base.WorkoutViewModel
@@ -15,5 +16,9 @@ class WorkoutRoutinesViewModel(
 
     fun createNewRoutine() {
         routinesRepository.createRoutine(UUID.randomUUID().toString())
+    }
+
+    suspend fun deleteRoutine(routine: Routine) {
+        routinesRepository.deleteRoutineImmediately(routine)
     }
 }

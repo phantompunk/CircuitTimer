@@ -13,7 +13,10 @@
     <fragment android:id="@+id/workoutRoutinesFragment"
               android:name="com.rva.lemma.circuittimer.ui.workout.routines.WorkoutRoutinesFragment"
               android:label="workout_routines_fragment"
-              tools:layout="@layout/workout_routines_fragment"/>
+              tools:layout="@layout/workout_routines_fragment">
+        <action android:id="@+id/action_workoutRoutinesFragment_to_currentRoutineFragment"
+                app:destination="@+id/currentRoutineFragment"/>
+    </fragment>
 
     <fragment android:id="@+id/settingsFragment"
               android:name="com.rva.lemma.circuittimer.ui.settings.SettingsFragment"

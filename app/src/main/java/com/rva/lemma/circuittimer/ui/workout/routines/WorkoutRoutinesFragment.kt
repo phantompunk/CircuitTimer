@@ -1,19 +1,21 @@
 package com.rva.lemma.circuittimer.ui.workout.routines
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-
 import com.rva.lemma.circuittimer.R
 import com.rva.lemma.circuittimer.data.database.entity.Routine
 import com.rva.lemma.circuittimer.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.OnItemClickListener
+import com.xwray.groupie.OnItemLongClickListener
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.workout_routines_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +69,8 @@ class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
 
     private fun initRecyclerView(routines: List<RoutineItem>) {
         val groupAdapter = GroupAdapter<ViewHolder>().apply {
+            setOnItemClickListener(onItemClickListener)
+            setOnItemLongClickListener(onItemLongClickListener)
             addAll(routines)
         }
 
@@ -78,6 +82,26 @@ class WorkoutRoutinesFragment : ScopedFragment(), KodeinAware {
 
     private fun List<Routine>.toRoutineItems(): List<RoutineItem> {
         return map { RoutineItem(it) }
+    }
+
+    private val onItemClickListener = OnItemClickListener { item, _ ->
+        if (item is RoutineItem) {
+            val bundle = Bundle()
+            bundle.putString("routineId", item.routine.id)
+            findNavController().navigate(R.id.action_workoutRoutinesFragment_to_currentRoutineFragment, bundle)
+        }
+    }
+
+    private val onItemLongClickListener = OnItemLongClickListener { item, _ ->
+        Log.d("Long", "Long Click Listener")
+        if (item is RoutineItem) {
+            deleteRoutine(item)
+        }
+        true
+    }
+
+    private fun deleteRoutine(item: RoutineItem) = launch(Dispatchers.IO) {
+        viewModel.deleteRoutine(item.routine)
     }
 }
 
