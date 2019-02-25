@@ -9,7 +9,6 @@ import com.rva.lemma.circuittimer.data.database.entity.Exercise
 import com.rva.lemma.circuittimer.data.database.entity.Routine
 
 @Database(entities = [Routine::class, Exercise::class], version = 1, exportSchema = false)
-@TypeConverters(ExerciseConverter::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun routineDao(): RoutineDao
     abstract fun exerciseDao(): ExerciseDao

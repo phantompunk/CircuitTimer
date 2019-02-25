@@ -13,10 +13,8 @@ class RoutineRepositoryImpl(
         routineDao.destroyRoutine(routine)
     }
 
-    override suspend fun getRoutineByID(routineID: String): LiveData<out Routine> {
-        return withContext(Dispatchers.IO) {
-            return@withContext routineDao.getRoutineById(routineID)
-        }
+    override fun getRoutineByID(routineID: String): LiveData<out Routine> {
+        return routineDao.getRoutineById(routineID)
     }
 
     override fun createRoutine(routineID: String) {
