@@ -27,4 +27,8 @@ class RoutineRepositoryImpl(
             return@withContext routineDao.getRoutines()
         }
     }
+
+    override suspend fun getLastUsedRoutine(): LiveData<out Routine> {
+        return routineDao.getLastUsedRoutine()
+    }
 }

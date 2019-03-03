@@ -26,4 +26,7 @@ interface RoutineDao {
 
     @Query("SELECT * FROM routines")
     fun getRoutines(): LiveData<List<Routine>>
+
+    @Query("SELECT * FROM routines LIMIT 1")
+    fun getLastUsedRoutine(): LiveData<Routine>
 }

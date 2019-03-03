@@ -45,34 +45,26 @@ class CurrentRoutineFragment : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(CurrentRoutineViewModel::class.java)
 
-//        val groupAdapter = GroupAdapter<ViewHolder>()
-//        groupAdapter.add(ExerciseItem())
-//        groupAdapter.add(ExerciseItem())
-//        groupAdapter.add(ExerciseItem())
-//        groupAdapter.add(ExerciseItem())
-//
-//        currentRoutineRecyclerView.adapter = groupAdapter
-//        currentRoutineRecyclerView.layoutManager = LinearLayoutManager(this.context)
         bindUI()
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {
         if (!routineId.isNullOrBlank()) {
+            current_empty_list.visibility = View.GONE
             val routineExercises = viewModel.getAllExercisesForRoutine(routineId!!)
             routineExercises.observe(this@CurrentRoutineFragment, Observer { exercises ->
                 if (exercises.isNotEmpty()) {
                     initGroupAdapter(exercises.toExerciseItems())
                 }
             })
-            val routine = viewModel.getRoutine(routineId!!)
-            routine.observe(this@CurrentRoutineFragment, Observer { selectedRoutine ->
-                if (selectedRoutine != null && selectedRoutine is Routine) {
-                    initRecyclerView(selectedRoutine)
+        } else {
+            val latestRoutine = viewModel.getLastUsedRoutine()
+            latestRoutine.observe(this@CurrentRoutineFragment, Observer { routine ->
+                if (routine != null) {
+                    routineId = routine.id
                 }
             })
-//            if (routine is Routine)
-//            initRecyclerView(routine)
-//            val groupAdapter = GroupAdapter<ViewHolder>().apply {  }
+            loadExercises()
         }
 
         fab_add_be!!.setOnClickListener { view ->
@@ -80,6 +72,18 @@ class CurrentRoutineFragment : ScopedFragment(), KodeinAware {
                 .setAction("Action", null)
                 .show()
             createExercise()
+        }
+    }
+
+    private fun loadExercises() = launch(Dispatchers.IO) {
+        if (routineId != null) {
+            val routineExercises = viewModel.getAllExercisesForRoutine(routineId!!)
+
+            routineExercises.observe(this@CurrentRoutineFragment, Observer { exercises ->
+                if (exercises.isNotEmpty()) {
+                    initGroupAdapter(exercises.toExerciseItems())
+                }
+            })
         }
     }
 
@@ -103,9 +107,6 @@ class CurrentRoutineFragment : ScopedFragment(), KodeinAware {
 
     private fun initRecyclerView(routine: Routine) {
         Log.d("Currrent", "RoutineID: ${routine.id}")
-//        val groupAdapter = GroupAdapter<ViewHolder>().apply {
-//            add(routine.toRoutineItem())
-//        }
     }
 
     override fun onAttach(context: Context?) {

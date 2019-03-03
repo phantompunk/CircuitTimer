@@ -25,5 +25,9 @@ class CurrentRoutineViewModel(
         return exerciseRepository.getAllExercisesByRoutine(routineId)
     }
 
+    suspend fun getLastUsedRoutine(): LiveData<out Routine> {
+        return routineRepository.getLastUsedRoutine()
+    }
+
     private val currentRoutine by lazyDeferred { routineRepository.createRoutine("90") }
 }
