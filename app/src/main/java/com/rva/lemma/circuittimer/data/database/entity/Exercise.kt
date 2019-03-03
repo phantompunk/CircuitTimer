@@ -3,13 +3,18 @@ package com.rva.lemma.circuittimer.data.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.rva.lemma.circuittimer.data.database.ExerciseType
 import java.util.*
 
 @Entity(tableName = "exercises",
-        foreignKeys = [ForeignKey(entity = Routine::class, parentColumns = ["id"], childColumns = ["routineId"])],
+        foreignKeys = [ForeignKey(
+            entity = Routine::class,
+            parentColumns = ["id"],
+            childColumns = ["routineId"],
+            onDelete = CASCADE)],
         indices = [Index("routineId")]
 )
 data class Exercise(

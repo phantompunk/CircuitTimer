@@ -9,23 +9,26 @@ import kotlinx.coroutines.withContext
 class RoutineRepositoryImpl(
     private val routineDao: RoutineDao
 ) : RoutineRepository {
-
-    override suspend fun getRoutineByID(routineID: String): LiveData<out Routine> {
-        return withContext(Dispatchers.IO) {
-            return@withContext routineDao.getRoutineById(routineID)
-        }
+    override suspend fun deleteRoutineImmediately(routine: Routine) {
+        routineDao.destroyRoutine(routine)
     }
 
-    override suspend fun createRoutine(routineID: String) {
-        withContext(Dispatchers.IO) {
-            val newRoutine = Routine(routineID)
-            routineDao.addRoutine(newRoutine)
-        }
+    override fun getRoutineByID(routineID: String): LiveData<out Routine> {
+        return routineDao.getRoutineById(routineID)
+    }
+
+    override fun createRoutine(routineID: String) {
+        val newRoutine = Routine(routineID)
+        routineDao.addRoutine(newRoutine)
     }
 
     override suspend fun getAllRoutines(): LiveData<out List<Routine>> {
         return withContext(Dispatchers.IO) {
             return@withContext routineDao.getRoutines()
         }
+    }
+
+    override suspend fun getLastUsedRoutine(): LiveData<out Routine> {
+        return routineDao.getLastUsedRoutine()
     }
 }

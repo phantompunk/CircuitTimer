@@ -1,5 +1,6 @@
 package com.rva.lemma.circuittimer.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,9 +21,9 @@ interface ExerciseDao {
     @Delete
     fun delete(exercise: Exercise)
 
-    @Query("SELECT * from exercises")
-    fun getAllExercises(): List<Exercise>
+    @Query("SELECT * FROM exercises WHERE routineId = :routineId")
+    fun getAllExercisesByRoutine(routineId: String): LiveData<List<Exercise>>
 
-    @Query("SELECT * from exercises where routineId = :routineId")
-    fun findExercisesForRoutine(routineId: String): List<Exercise>
+//    @Query("SELECT * from exercises where routineId = :routineId")
+//    fun findExercisesForRoutine(routineId: String): List<Exercise>
 }

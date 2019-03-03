@@ -23,9 +23,9 @@ class TimerApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { instance<AppDatabase>().routineDao() }
         bind() from singleton { instance<AppDatabase>().exerciseDao() }
-        bind<ExerciseRepository>() with singleton { ExerciseRepositoryImpl() }
+        bind<ExerciseRepository>() with singleton { ExerciseRepositoryImpl(instance()) }
         bind<RoutineRepository>() with singleton { RoutineRepositoryImpl(instance()) }
-        bind() from provider { CurrentRoutineViewModelFactory(instance()) }
+        bind() from provider { CurrentRoutineViewModelFactory(instance(), instance()) }
         bind() from provider { WorkoutRoutinesViewModelFactory(instance()) }
     }
 
