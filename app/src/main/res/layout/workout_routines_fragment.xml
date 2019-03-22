@@ -8,7 +8,7 @@
         tools:context=".ui.workout.routines.WorkoutRoutinesFragment">
 
     <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/current_toolbar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#fff"
@@ -26,10 +26,10 @@
             android:textSize="36sp"
             android:textColor="#000"
             android:textStyle="bold"
-            android:id="@+id/textView3"
+            android:id="@+id/current_routine_name_tv"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="35dp"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar" android:layout_marginStart="47dp"
+            app:layout_constraintBottom_toBottomOf="@+id/current_toolbar" android:layout_marginStart="47dp"
             android:layout_marginBottom="36dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#ffffff"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/current_toolbar" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
