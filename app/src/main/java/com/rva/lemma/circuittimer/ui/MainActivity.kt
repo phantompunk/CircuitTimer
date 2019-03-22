@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(main_toolbar)
+        supportActionBar?.hide()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 

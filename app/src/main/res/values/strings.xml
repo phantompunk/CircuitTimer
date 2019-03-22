@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CircuitTimer</string>
+    <string name="current_routine_empty_text">Select a Routine</string>
+    <string name="current_start_bt_text">Start</string>
+    <string name="current_routine_name">Bootcamp</string>
+    <string name="current_circuit_count">8 exercises</string>
+    <string name="current_exercises">8 exercises</string>
+    <string name="current_time">00:17:30</string>
 </resources>
